@@ -93,14 +93,14 @@ public class BitcoinJSONRPCClient implements BitcoindRpcClient {
       File f;
       File home = new File(System.getProperty("user.home"));
 
-      if ((f = new File(home, ".bitcoin" + File.separatorChar + "bitcoin.conf")).exists()) {
-      } else if ((f = new File(home, "AppData" + File.separatorChar + "Roaming" + File.separatorChar + "Bitcoin" + File.separatorChar + "bitcoin.conf")).exists()) {
+      if ((f = new File(home, ".groestlcoin" + File.separatorChar + "groestlcoin.conf")).exists()) {
+      } else if ((f = new File(home, "AppData" + File.separatorChar + "Roaming" + File.separatorChar + "Groestlcoin" + File.separatorChar + "groestlcoin.conf")).exists()) {
       } else {
         f = null;
       }
 
       if (f != null) {
-        logger.fine("Bitcoin configuration file found");
+        logger.fine("Groestlcoin configuration file found");
 
         Properties p = new Properties();
         try (FileInputStream i = new FileInputStream(f)) {
@@ -158,7 +158,7 @@ public class BitcoinJSONRPCClient implements BitcoindRpcClient {
   public Object loadResponse(InputStream in, Object expectedID, boolean close) throws IOException, BitcoinRpcException {
     try {
       String r = new String(loadStream(in, close), QUERY_CHARSET);
-      logger.log(Level.FINE, "Bitcoin JSON-RPC response:\n{0}", r);
+      logger.log(Level.FINE, "Groestlcoin JSON-RPC response:\n{0}", r);
       try {
         Map response = (Map) JSON.parse(r);
 
@@ -196,7 +196,7 @@ public class BitcoinJSONRPCClient implements BitcoindRpcClient {
 //            conn.connect();
       ((HttpURLConnection) conn).setRequestProperty("Authorization", "Basic " + authStr);
       byte[] r = prepareRequest(method, o);
-      logger.log(Level.FINE, "Bitcoin JSON-RPC request:\n{0}", new String(r, QUERY_CHARSET));
+      logger.log(Level.FINE, "Groestlcoin JSON-RPC request:\n{0}", new String(r, QUERY_CHARSET));
       conn.getOutputStream().write(r);
       conn.getOutputStream().close();
       int responseCode = conn.getResponseCode();
