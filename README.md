@@ -5,13 +5,13 @@ Maintenance server for Lightning Wallet
 
 1. Install Java by following steps described at https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-ubuntu-16-04
 
-2. Install Bitcoin Core:
+2. Install Groestlcoin Core:
 ```
 sudo apt-get update  
-sudo apt-get install bitcoind
+sudo apt-get install groestlcoind
 ```
 
-3. Bitcoin config file should contain the following lines: 
+3. Groestlcoin config file should contain the following lines: 
 ```
 daemon=1
 server=1
@@ -64,7 +64,7 @@ $ mongo
 
 6. Get Eclair fat JAR file, either by downloading it directly from a repository or by compiling from source:  
 ```
-git clone https://github.com/ACINQ/eclair.git  
+git clone https://github.com/Groestlcoin/eclair.git  
 cd eclair  
 mvn package  
 ```
