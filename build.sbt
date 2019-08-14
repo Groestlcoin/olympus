@@ -4,6 +4,7 @@ name := "olympus"
 version := "1.0"
 
 scalaVersion := "2.11.11"
+resolvers += Resolver.jcenterRepo
 
 // Network
 libraryDependencies += "org.http4s" % "http4s-dsl_2.11" % "0.15.5"
@@ -23,7 +24,7 @@ libraryDependencies += "com.typesafe.akka" % "akka-actor_2.11" % "2.5.11"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.5" % "test"
 libraryDependencies += "com.madgag.spongycastle" % "core" % "1.58.0.0"
 libraryDependencies += "org.scodec" % "scodec-core_2.11" % "1.11.3"
-libraryDependencies += "org.groesltcoinj" % "groesltcoinj-core" % "0.14.7"
+libraryDependencies += "org.groestlcoinj" % "groestlcoinj-core" % "0.15.2"
 libraryDependencies += "io.reactivex" % "rxscala_2.11" % "0.26.5"
 libraryDependencies += "commons-codec" % "commons-codec" % "1.9"
 libraryDependencies += "org.jgrapht" % "jgrapht-core" % "1.1.0"
