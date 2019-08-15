@@ -237,7 +237,7 @@ object Crypto {
   }
 
   def hash2(digest: Groestl)(input: ByteVector): ByteVector = {
-    val out = new Array[Byte](digest.getDigestSize)
+    val out = new Array[Byte](64)
     (Groestl.digest(input.toArray)).copyToArray(out)
     ByteVector.view(out)
   }
