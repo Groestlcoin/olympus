@@ -19,8 +19,8 @@ server=1
 rpcuser=foo # set your own
 rpcpassword=bar # set your own
 
-rpcport=18332
-port=8333
+rpcport=1441
+port=1331
 txindex=1
 
 addresstype=bech32
@@ -78,7 +78,7 @@ eclair {
 	server {
 		public-ips = ["127.0.0.1"]
 		binding-ip = "0.0.0.0"
-		port = 9096
+		port = 9196
 	}
 
 	api {
@@ -90,7 +90,7 @@ eclair {
 
 	bitcoind {
 		host = "localhost"
-		rpcport = 18332
+		rpcport = 1331
 		rpcuser = "foo"
 		rpcpassword = "bar"
 		zmq = "tcp://127.0.0.1:29000"
@@ -112,12 +112,12 @@ assembly
 10. Run Olympus instance by issuing:
 ```
 $ java -jar olympus-assembly-1.0.jar production "{
-\"zmqApi\":\"tcp://127.0.0.1:29000\", // Bitcoin ZeroMQ endpoint
+\"zmqApi\":\"tcp://127.0.0.1:29000\", // Groestlcoin ZeroMQ endpoint
 \"ip\":\"192.3.114.77\", // Olympus API will be accessible at this address...
 \"port\":9203, // ...and this port
 \"privKey\":\"17237641984433455757821928886025053286790003625266087739786982589470995742521\", // To blind-sign storage tokens
-\"btcApi\":\"http://foo:bar@127.0.0.1:18332\", // Bitcoin Json-RPC endpoint
-\"eclairSockPort\":9935, // Eclair port
+\"btcApi\":\"http://foo:bar@127.0.0.1:1331\", // Groestlcoin Json-RPC endpoint
+\"eclairSockPort\":9196, // Eclair port
 \"rewindRange\":14, // How many blocks to inspect on restart if Olympus was offline for some time, important for watchtower
 \"eclairSockIp\":\"192.3.114.77\", // Eclair address
 \"eclairNodeId\":\"02330d13587b67a85c0a36ea001c4dba14bcd48dda8988f7303275b040bffb6abd\",
