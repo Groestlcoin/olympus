@@ -45,9 +45,9 @@ abstract class Database {
 }
 
 class MongoDatabase extends Database {
-  val blindSignatures: MongoDB = MongoClient("localhost")("btc-blindSignatures")
-  val watchedTxs: MongoDB = MongoClient("localhost")("btc-watchedTxs")
-  val olympus: MongoDB = MongoClient("localhost")("btc-olympus")
+  val blindSignatures: MongoDB = MongoClient("localhost")("grs-blindSignatures")
+  val watchedTxs: MongoDB = MongoClient("localhost")("grs-watchedTxs")
+  val olympus: MongoDB = MongoClient("localhost")("grs-olympus")
   final val createdAt = "createdAt"
 
   def getSpenders(txids: StringVec): StringVec = olympus("spentTxs").find("txids" $in txids).map(_ as[String] "prefix").toVector
