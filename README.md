@@ -3,9 +3,13 @@ Maintenance server for Lightning Wallet
 
 ### Installation manual for Ubuntu 16.04
 
-1. Install Java by following steps described at https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-ubuntu-16-04
+1. Install Java by following steps described at https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-ubuntu-16-04:
+```
+sudo apt-get update  
+sudo apt-get install default-jre
+```
 
-2. Install Groestlcoin Core:
+2. Install Groestlcoin Core by following steps described at https://groestlcoin.org/forum/index.php?topic=299.0:
 ```
 sudo apt-get update  
 sudo apt-get install groestlcoind
@@ -16,8 +20,8 @@ sudo apt-get install groestlcoind
 daemon=1
 server=1
 
-rpcuser=foo # set your own
-rpcpassword=bar # set your own
+rpcuser=yourusernamehere # set your own
+rpcpassword=yourpasswordhere # set your own
 
 rpcport=1441
 port=1331
@@ -30,13 +34,20 @@ zmqpubhashblock=tcp://127.0.0.1:29000
 zmqpubrawblock=tcp://127.0.0.1:29000
 ```
 
-4. Install and run a MongoDB by following steps described at https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+4. Install and run a MongoDB by following steps described at https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/ :
+```
+wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+sudo service mongod start
+```
 
 5. Open MongoDB console and issue the following commands:
 ```
 $ mongo
 
-> use btc-olympus
+> use grs-olympus
 > db.spentTxs.createIndex( { "createdAt": 1 }, { expireAfterSeconds: 3600 * 24 * 90 } )
 > db.spentTxs.createIndex( { "prefix": 1 }, { unique: true } )
 > db.spentTxs.createIndex( { "txids": 1 } )
@@ -50,19 +61,19 @@ $ mongo
 > db.chanInfo.createIndex( { "shortChanId": 1 } )
 > db.chanInfo.createIndex( { "createdAt": 1 }, { expireAfterSeconds: 3600 * 24 * 365 } )
 
-> use btc-blindSignatures
+> use grs-blindSignatures
 > db.blindTokens.createIndex( { "createdAt": 1 }, { expireAfterSeconds: 3600 * 24 * 365 } )
 > db.blindTokens.createIndex( { "seskey": 1 }, { unique: true } )
 > var decimalAlphabet = "0123456789".split('')
 > decimalAlphabet.forEach(function(v) { db["clearTokens" + v].createIndex( { "token": 1 }, { unique: true } ) })
 
-> use btc-watchedTxs
+> use grs-watchedTxs
 > var hexAlphabet = "0123456789abcdef".split('')
 > hexAlphabet.forEach(function(v) { db["watchedTxs" + v].createIndex( { "createdAt": 1 }, { expireAfterSeconds: 3600 * 24 * 360 * 2 } ) })
 > hexAlphabet.forEach(function(v) { db["watchedTxs" + v].createIndex( { "halfTxId": 1 } ) })
 ```
 
-6. Get Eclair fat JAR file, either by downloading it directly from a repository or by compiling from source:  
+6. Get Groestlcoin Eclair fat JAR file, either by downloading it directly from a repository or by compiling from source:  
 ```
 git clone https://github.com/Groestlcoin/eclair.git  
 cd eclair  
@@ -99,11 +110,11 @@ eclair {
 
 ```
 
-8. Run Ecliar instance by issuing `java -Declair.datadir=eclairdata/ -jar eclair-node.jar`
+8. Run Eclair instance by issuing `java -Declair.datadir=eclairdata/ -jar eclair-node.jar`
 
 9. Get Olympus fat JAR file, either by downloading it directly from a repository or by compiling from source: 
 ```
-git clone https://github.com/btcontract/olympus.git  
+git clone https://github.com/groestlcoin/olympus.git  
 cd olympus  
 sbt "set test in assembly := {}" clean assembly
 assembly  
