@@ -9,11 +9,7 @@ sudo apt-get update
 sudo apt-get install default-jre
 ```
 
-2. Install Groestlcoin Core by following steps described at https://groestlcoin.org/forum/index.php?topic=299.0:
-```
-sudo apt-get update  
-sudo apt-get install groestlcoind
-```
+2. Install Groestlcoin Core by following steps described at https://groestlcoin.org/forum/index.php?topic=299.0
 
 3. Groestlcoin config file should contain the following lines: 
 ```
@@ -71,53 +67,61 @@ $ mongo
 > var hexAlphabet = "0123456789abcdef".split('')
 > hexAlphabet.forEach(function(v) { db["watchedTxs" + v].createIndex( { "createdAt": 1 }, { expireAfterSeconds: 3600 * 24 * 360 * 2 } ) })
 > hexAlphabet.forEach(function(v) { db["watchedTxs" + v].createIndex( { "halfTxId": 1 } ) })
+
+> quit()
 ```
 
 6. Get Groestlcoin Eclair fat JAR file, either by downloading it directly from a repository or by compiling from source:  
 ```
-git clone https://github.com/Groestlcoin/eclair.git  
-cd eclair  
-mvn package  
+wget https://github.com/Groestlcoin/eclair/releases/download/v0.3.2/eclair-node-0.3.2-SNAPSHOT-64c76f6.jar  
 ```
 
 7. Create an `eclairdata` directory and put an `eclair.conf` file there with the following lines:
 ```
+mkdir eclairdata && cd eclairdata
+nano eclair.conf
+```
+
+```
 eclair {
-	chain = "test"
-	spv = false
+	chain = "mainnet" // "regtest" for regtest, "testnet" for testnet, "mainnet" for mainnet
 
 	server {
-		public-ips = ["127.0.0.1"]
+		public-ips = ["127.0.0.1"] // external ips, will be announced on the network
 		binding-ip = "0.0.0.0"
-		port = 9196
+		port = 9196 // default = 9735
 	}
 
 	api {
-		enabled = true
+		enabled = true // disabled by default for security reasons
 		binding-ip = "127.0.0.1"
-		port = 8086
-		password = "pass"
+		port = 8086 // default = 8080
+		password = "pass" // password for basic auth, must be non empty if json-rpc api is enabled
 	}
 
+        watcher-type = "bitcoind" // other *experimental* values include "electrum"
+	
 	bitcoind {
 		host = "localhost"
-		rpcport = 1331
-		rpcuser = "foo"
-		rpcpassword = "bar"
-		zmq = "tcp://127.0.0.1:29000"
+		rpcport = 1441
+		rpcuser = "yourusernamehere"
+		rpcpassword = "yourpasswordhere"
+		zmqblock = "tcp://127.0.0.1:29000"
+		zmqtx = "tcp://127.0.0.1:29000"
 	}
 }
 
 ```
 
-8. Run Eclair instance by issuing `java -Declair.datadir=eclairdata/ -jar eclair-node.jar`
-
-9. Get Olympus fat JAR file, either by downloading it directly from a repository or by compiling from source: 
+8. Run Groestlcoin Eclair instance by issuing: 
 ```
-git clone https://github.com/groestlcoin/olympus.git  
-cd olympus  
-sbt "set test in assembly := {}" clean assembly
-assembly  
+cd\
+screen
+java -Declair.datadir=eclairdata/ -jar eclair-node-0.3.2-SNAPSHOT-64c76f6.jar
+```
+9. Get Olympus fat JAR file by by downloading it directly from our repository: 
+```
+wget 
 ```
 
 10. Run Olympus instance by issuing:
