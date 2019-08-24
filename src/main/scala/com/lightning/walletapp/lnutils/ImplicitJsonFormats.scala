@@ -107,6 +107,13 @@ object ImplicitJsonFormats extends DefaultJsonProtocol { me =>
   implicit val coinGeckoItemFmt = jsonFormat[String, Double, CoinGeckoItem](CoinGeckoItem.apply, "unit", "value")
   implicit val coinGeckoFmt = jsonFormat[CoinGeckoItemMap, CoinGecko](CoinGecko.apply, "rates")
   implicit val bitpayFmt = jsonFormat[BitpayItemList, Bitpay](Bitpay.apply, "data")
+
+  implicit val bittrexResultRateFmt = jsonFormat[Double, BittrexResult](BittrexResult.apply, "Last")
+  //implicit val bittrexRateFmt = jsonFormat[Boolean, String, BittrexResult, BittrexResponse](BittrexResponse.apply, "success", "message", "result")
+  //implicit val bitcoinAverageRateFmt = jsonFormat[Double, BitcoinAverageGRSItem](BitcoinAverageGRSItem.apply, "last")
+
+  implicit val bittrexFmt = jsonFormat[BittrexResult, Bittrex](Bittrex.apply, "result")
+  implicit val bitcoinAverageFmt = jsonFormat[Double, BitcoinAverageGRS](BitcoinAverageGRS.apply, "last")
 }
 
 case class InRoutesPlus(sat: Long,
