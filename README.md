@@ -5,14 +5,15 @@ Maintenance server for Lightning Wallet
 
 1. Install Java by following steps described at https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-ubuntu-16-04 for Ubuntu 16.04:
 ```
+sudo add-apt-repository ppa:openjdk-r/ppa
 sudo apt-get update  
-sudo apt-get install default-jre
+sudo apt install openjdk-11-jre
 ```
 
 For Ubuntu 18.04:
 ```
 sudo apt-get update  
-sudo apt install openjdk-8-jre
+sudo apt install openjdk-11-jre
 ```
 
 2. Install Groestlcoin Core by following steps described at https://groestlcoin.org/forum/index.php?topic=299.0
