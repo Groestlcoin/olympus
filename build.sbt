@@ -3,7 +3,7 @@ name := "olympus"
 
 version := "1.0"
 
-scalaVersion := "2.11.11"
+scalaVersion := "2.11.12"
 resolvers += Resolver.jcenterRepo
 resolvers += Resolver.bintrayRepo("hashengineering", "groestlcoin")
 
@@ -31,7 +31,7 @@ libraryDependencies += "commons-codec" % "commons-codec" % "1.9"
 libraryDependencies += "org.jgrapht" % "jgrapht-core" % "1.1.0"
 libraryDependencies += "org.jgrapht" % "jgrapht-ext" % "1.1.0"
 
-val workaround = {
+val workaround: Unit = {
   sys.props += "packaging.type" -> "jar"
   ()
 }

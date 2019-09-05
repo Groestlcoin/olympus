@@ -138,6 +138,8 @@ java -Declair.datadir=eclairdata/ -jar eclair-node-0.3.2-SNAPSHOT-64c76f6.jar
 ```
 wget https://github.com/Groestlcoin/olympus/releases/download/v1.0/olympus-assembly-1.0.jar
 ```
+Or build with with `sbt "set test in assembly := {}" clean assembly`
+
 10. Create self signed cert
 ```
 keytool -genkey -keyalg RSA -alias olympus1.groestlcoin.org -keystore keystore.jks -storepass pass123 -validity 1825 -keysize 2048
