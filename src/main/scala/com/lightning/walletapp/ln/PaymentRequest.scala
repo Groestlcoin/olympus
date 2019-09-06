@@ -145,9 +145,9 @@ object PaymentRequest {
   val expiryTag = ExpiryTag(3600 * 48)
 
   val prefixes =
-    Map(Block.RegtestGenesisBlock.hash -> "lnbcrt",
-      Block.TestnetGenesisBlock.hash -> "lntb",
-      Block.LivenetGenesisBlock.hash -> "lnbc")
+    Map(Block.RegtestGenesisBlock.hash -> "lngrst",
+      Block.TestnetGenesisBlock.hash -> "lntgrs",
+      Block.LivenetGenesisBlock.hash -> "lngrs")
 
   def apply(chain: ByteVector, amount: Option[MilliSatoshi], paymentHash: ByteVector,
             privKey: PrivateKey, description: String, fallbackAddress: Option[String],
